@@ -3,7 +3,6 @@ import 'song.dart';
 
 class SongEditorPage extends StatefulWidget {
   final List<Song> songs;
-
   SongEditorPage({required this.songs});
 
   @override
@@ -14,9 +13,9 @@ class _SongEditorPageState extends State<SongEditorPage> {
   final TextEditingController songNameController = TextEditingController();
   final TextEditingController chordsController = TextEditingController();
   final TextEditingController lyricsController = TextEditingController();
-
   List<String> chordsList = [];
   List<String> lyricsList = [];
+
 
   @override
   void dispose() {
@@ -63,6 +62,7 @@ class _SongEditorPageState extends State<SongEditorPage> {
       lyricsList.removeAt(index);
     });
   }
+  
 
   @override
   Widget build(BuildContext context) {
@@ -108,9 +108,11 @@ class _SongEditorPageState extends State<SongEditorPage> {
               child: Text('Add Chords and Lyrics Line'),
               style: ButtonStyle(
                 backgroundColor: MaterialStateProperty.all<Color>(
-                    Color.fromARGB(255, 47, 224, 177)),
-                foregroundColor:
-                    MaterialStateProperty.all<Color>(Colors.black87),
+                  Color.fromARGB(255, 47, 224, 177),
+                ),
+                foregroundColor: MaterialStateProperty.all<Color>(
+                  Colors.black87,
+                ),
                 shape: MaterialStateProperty.all<OutlinedBorder>(
                   RoundedRectangleBorder(
                     side: BorderSide(color: Colors.black87),
@@ -135,15 +137,18 @@ class _SongEditorPageState extends State<SongEditorPage> {
                             children: [
                               GestureDetector(
                                 onTap: () => editChordsAndLyricsLine(index),
-                                child: Icon(Icons.edit,
-                                color: Colors.blue,)
-                                
+                                child: Icon(
+                                  Icons.edit,
+                                  color: Colors.blue,
+                                ),
                               ),
                               SizedBox(width: 10),
                               GestureDetector(
                                 onTap: () => deleteChordsAndLyricsLine(index),
-                                child: Icon(Icons.delete,
-                                color: Colors.red,),
+                                child: Icon(
+                                  Icons.delete,
+                                  color: Colors.red,
+                                ),
                               ),
                             ],
                           ),
@@ -176,9 +181,11 @@ class _SongEditorPageState extends State<SongEditorPage> {
               child: Text('Save Song'),
               style: ButtonStyle(
                 backgroundColor: MaterialStateProperty.all<Color>(
-                    Color.fromARGB(255, 225, 9, 9)),
+                  Color.fromARGB(255, 225, 9, 9),
+                ),
                 foregroundColor: MaterialStateProperty.all<Color>(
-                    const Color.fromARGB(221, 250, 250, 250)),
+                  const Color.fromARGB(221, 250, 250, 250),
+                ),
                 shape: MaterialStateProperty.all<OutlinedBorder>(
                   RoundedRectangleBorder(
                     side: BorderSide(color: Colors.black87),

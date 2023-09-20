@@ -1,10 +1,37 @@
 import 'package:flutter/material.dart';
 import 'song.dart';
-
 class SongListPage extends StatelessWidget {
   final List<Song> songs;
-
   SongListPage({required this.songs});
+
+  void deleteSong(BuildContext context, int index) {
+    showDialog(
+      context: context,
+      builder: (context) {
+        return AlertDialog(
+          title: Text('Delete Song'),
+          content: Text('Are you sure you want to delete this song?'),
+          actions: [
+            ElevatedButton(
+              onPressed: () {
+                // Delete the song from the list
+                songs.removeAt(index);
+                Navigator.pop(context); // Close the dialog
+                Navigator.pop(context); // Close the song details page
+              },
+              child: Text('Delete'),
+            ),
+            ElevatedButton(
+              onPressed: () {
+                Navigator.pop(context); // Close the dialog
+              },
+              child: Text('Cancel'),
+            ),
+          ],
+        );
+      },
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -50,9 +77,15 @@ class SongListPage extends StatelessWidget {
                     actions: [
                       ElevatedButton(
                         onPressed: () {
-                          Navigator.pop(context);
+                          Navigator.pop(context); // Close the dialog
                         },
                         child: Text('Close'),
+                      ),
+                      ElevatedButton(
+                        onPressed: () {
+                          deleteSong(context, index);
+                        },
+                        child: Text('Delete Song'),
                       ),
                     ],
                   );
