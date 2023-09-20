@@ -21,6 +21,3 @@ HomePage จะมีอยู่2ปุ่มในการไปหน้า�
 
 # Delete Song
 ![Home](/Screenshot/DeleteSong.png)
-
-# Go to APK
-[โหลดAPKที่นี่](Lyrics_App/app-release.apk)
