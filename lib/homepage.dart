@@ -11,7 +11,7 @@ class HomePage extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
-        title: Text(
+        title: const Text(
           'Home',
           style: TextStyle(
             fontSize: 34,
@@ -19,8 +19,8 @@ class HomePage extends StatelessWidget {
             fontWeight: FontWeight.bold,
           ),
         ),
-        backgroundColor: Color.fromARGB(255, 142, 224, 211),
-        shape: ContinuousRectangleBorder(
+        backgroundColor: const Color.fromARGB(255, 142, 224, 211),
+        shape: const ContinuousRectangleBorder(
           borderRadius: BorderRadius.only(
             bottomLeft: Radius.circular(30),
             bottomRight: Radius.circular(30),
@@ -28,35 +28,35 @@ class HomePage extends StatelessWidget {
         ),
       ),
       body: Container(
-        decoration: BoxDecoration(
+        decoration: const BoxDecoration(
           gradient: LinearGradient(
             colors: [
-              const Color.fromARGB(255, 252, 255, 255),
-              const Color.fromARGB(255, 212, 248, 244),
-              const Color.fromARGB(255, 159, 218, 212),
-              const Color.fromARGB(255, 62, 226, 210),
+              Color.fromARGB(255, 252, 255, 255),
+              Color.fromARGB(255, 212, 248, 244),
+              Color.fromARGB(255, 159, 218, 212),
+              Color.fromARGB(255, 62, 226, 210),
             ],
             begin: Alignment.topCenter,
             end: Alignment.bottomCenter,
           ),
         ),
         child: Padding(
-          padding: EdgeInsets.symmetric(horizontal: 20),
+          padding: const EdgeInsets.symmetric(horizontal: 20),
           child: Column(
             children: [
               Align(
                 alignment: Alignment.topCenter,
                 child: Column(
                   children: [
-                    SizedBox(height: 180),
-                    Text(
+                    const SizedBox(height: 180),
+                    const Text(
                       'Write your Song',
                       style: TextStyle(
                         fontSize: 34,
                         fontWeight: FontWeight.bold,
                       ),
                     ),
-                    SizedBox(height: 20),
+                    const SizedBox(height: 20),
                     Icon(
                       Icons.music_note,
                       size: 48,
@@ -65,7 +65,7 @@ class HomePage extends StatelessWidget {
                   ],
                 ),
               ),
-              SizedBox(height: 60),
+              const SizedBox(height: 60),
               ElevatedButton(
                 onPressed: () {
                   Navigator.push(
@@ -82,7 +82,7 @@ class HomePage extends StatelessWidget {
                 style: ElevatedButton.styleFrom(
                   padding: EdgeInsets.all(16),
                 ),
-                child: Row(
+                child: const Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Text(
@@ -107,7 +107,7 @@ class HomePage extends StatelessWidget {
                     ),
                   );
                 },
-                child: Padding(
+                child: const Padding(
                   padding: EdgeInsets.all(16),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.center,

@@ -4,7 +4,6 @@ import 'song.dart';
 class SongEditorPage extends StatefulWidget {
   final List<Song> songs;
   SongEditorPage({required this.songs});
-
   @override
   _SongEditorPageState createState() => _SongEditorPageState();
 }
@@ -16,6 +15,7 @@ class _SongEditorPageState extends State<SongEditorPage> {
   List<String> chordsList = [];
   List<String> lyricsList = [];
 
+  bool isSaveButtonEnabled = false;
 
   @override
   void dispose() {
@@ -26,12 +26,15 @@ class _SongEditorPageState extends State<SongEditorPage> {
   }
 
   void addChordsAndLyricsLine() {
-    setState(() {
-      chordsList.add(chordsController.text);
-      lyricsList.add(lyricsController.text);
-      chordsController.clear();
-      lyricsController.clear();
-    });
+    if (chordsController.text.isNotEmpty || lyricsController.text.isNotEmpty) {
+      setState(() {
+        chordsList.add(chordsController.text);
+        lyricsList.add(lyricsController.text);
+        chordsController.clear();
+        lyricsController.clear();
+        validateFields();
+      });
+    }
   }
 
   void editChordsAndLyricsLine(int index) {
@@ -40,6 +43,7 @@ class _SongEditorPageState extends State<SongEditorPage> {
       lyricsController.text = lyricsList[index];
       chordsList.removeAt(index);
       lyricsList.removeAt(index);
+      validateFields();
     });
   }
 
@@ -47,6 +51,7 @@ class _SongEditorPageState extends State<SongEditorPage> {
     setState(() {
       chordsList.removeAt(index);
       lyricsList.removeAt(index);
+      validateFields();
     });
   }
 
@@ -54,74 +59,93 @@ class _SongEditorPageState extends State<SongEditorPage> {
     setState(() {
       lyricsController.text = lyricsList[index];
       lyricsList.removeAt(index);
+      validateFields();
     });
   }
 
   void deleteLyricsLine(int index) {
     setState(() {
       lyricsList.removeAt(index);
+      validateFields();
     });
   }
-  
+
+  void validateFields() {
+    setState(() {
+      isSaveButtonEnabled =
+          songNameController.text.isNotEmpty &&
+              (chordsList.isNotEmpty || lyricsList.isNotEmpty);
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(
+        title: const Text(
           'Song Editor',
           style: TextStyle(
             fontWeight: FontWeight.bold,
           ),
           textAlign: TextAlign.center,
         ),
+        backgroundColor: Colors.teal.shade200,
         centerTitle: true,
       ),
       body: Padding(
-        padding: EdgeInsets.all(20),
+        padding: const EdgeInsets.all(20),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
             TextField(
               controller: songNameController,
-              decoration: InputDecoration(
+              decoration: const InputDecoration(
                 labelText: 'Song Name',
               ),
+              onChanged: (value) {
+                validateFields();
+              },
             ),
-            SizedBox(height: 10),
+            const SizedBox(height: 10),
             TextField(
               controller: chordsController,
-              decoration: InputDecoration(
+              decoration: const InputDecoration(
                 labelText: 'Chords',
               ),
+              onChanged: (value) {
+                validateFields();
+              },
             ),
-            SizedBox(height: 10),
+            const SizedBox(height: 10),
             TextField(
               controller: lyricsController,
-              decoration: InputDecoration(
+              decoration: const InputDecoration(
                 labelText: 'Lyrics',
               ),
+              onChanged: (value) {
+                validateFields();
+              },
             ),
-            SizedBox(height: 10),
+            const SizedBox(height: 10),
             ElevatedButton(
               onPressed: addChordsAndLyricsLine,
-              child: Text('Add Chords and Lyrics Line'),
               style: ButtonStyle(
                 backgroundColor: MaterialStateProperty.all<Color>(
-                  Color.fromARGB(255, 47, 224, 177),
+                  const Color.fromARGB(255, 47, 224, 177),
                 ),
                 foregroundColor: MaterialStateProperty.all<Color>(
                   Colors.black87,
                 ),
                 shape: MaterialStateProperty.all<OutlinedBorder>(
                   RoundedRectangleBorder(
-                    side: BorderSide(color: Colors.black87),
+                    side: const BorderSide(color: Colors.black87),
                     borderRadius: BorderRadius.circular(20),
                   ),
                 ),
               ),
+              child: const Text('Add Chords and Lyrics Line'),
             ),
-            SizedBox(height: 10),
+            const SizedBox(height: 10),
             Expanded(
               child: ListView.builder(
                 itemCount: chordsList.length,
@@ -137,7 +161,7 @@ class _SongEditorPageState extends State<SongEditorPage> {
                             children: [
                               GestureDetector(
                                 onTap: () => editChordsAndLyricsLine(index),
-                                child: Icon(
+                                child: const Icon(
                                   Icons.edit,
                                   color: Colors.blue,
                                 ),
@@ -145,7 +169,7 @@ class _SongEditorPageState extends State<SongEditorPage> {
                               SizedBox(width: 10),
                               GestureDetector(
                                 onTap: () => deleteChordsAndLyricsLine(index),
-                                child: Icon(
+                                child: const Icon(
                                   Icons.delete,
                                   color: Colors.red,
                                 ),
@@ -154,7 +178,7 @@ class _SongEditorPageState extends State<SongEditorPage> {
                           ),
                         ],
                       ),
-                      SizedBox(height: 10),
+                      const SizedBox(height: 10),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
@@ -162,37 +186,39 @@ class _SongEditorPageState extends State<SongEditorPage> {
                           SizedBox(),
                         ],
                       ),
-                      SizedBox(height: 20),
+                      const SizedBox(height: 20),
                     ],
                   );
                 },
               ),
             ),
-            SizedBox(height: 20),
+            const SizedBox(height: 20),
             ElevatedButton(
-              onPressed: () {
-                String songName = songNameController.text;
-                List<String> chords = List.from(chordsList);
-                List<String> lyrics = List.from(lyricsList);
-                Song newSong =
-                    Song(name: songName, chords: chords, lyrics: lyrics);
-                Navigator.pop(context, newSong);
-              },
-              child: Text('Save Song'),
+              onPressed: isSaveButtonEnabled
+                  ? () {
+                      String songName = songNameController.text;
+                      List<String> chords = List.from(chordsList);
+                      List<String> lyrics = List.from(lyricsList);
+                      Song newSong =
+                          Song(name: songName, chords: chords, lyrics: lyrics);
+                      Navigator.pop(context, newSong);
+                    }
+                  : null,
               style: ButtonStyle(
                 backgroundColor: MaterialStateProperty.all<Color>(
-                  Color.fromARGB(255, 225, 9, 9),
+                  const Color.fromARGB(255, 225, 9, 9),
                 ),
                 foregroundColor: MaterialStateProperty.all<Color>(
                   const Color.fromARGB(221, 250, 250, 250),
                 ),
                 shape: MaterialStateProperty.all<OutlinedBorder>(
                   RoundedRectangleBorder(
-                    side: BorderSide(color: Colors.black87),
+                    side: const BorderSide(color: Colors.black87),
                     borderRadius: BorderRadius.circular(20),
                   ),
                 ),
               ),
+              child: const Text('Save Song'),
             ),
           ],
         ),
