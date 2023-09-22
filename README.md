@@ -1,16 +1,23 @@
 # lyrics_app
 
 A new Flutter project.
-
 ## Getting Started
+# Home 
+HomePage จะมีอยู่2ปุ่มในการไปหน้าต่างๆของแอพ จะมี หน้าไปEditor หรือแต่งเพลง และ หน้ารวมListเพลงที่เคยแต่งไว้
+![Home](/Screenshot/Home.png)
 
-This project is a starting point for a Flutter application.
+# หน้าสำหรับการแต่งเพลง SongEditor
+![Home](/Screenshot/SongEditor.png)
 
-A few resources to get you started if this is your first Flutter project:
+![Home](/Screenshot/Edit1.png)
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+![Home](/Screenshot/Edit2.png)
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+# หน้ารวมลิสเพลงทั้งหมดที่เคยแต่ง
+![Home](/Screenshot/ListSongPage.png)
+
+# หน้ารายละเอียดเนื้อเพลงและคอร์ดเพลง หลังจากกดเข้ามาจากหน้List
+![Home](/Screenshot/DetailSong.png)
+
+# Delete Song
+![Home](/Screenshot/DeleteSong.png)
