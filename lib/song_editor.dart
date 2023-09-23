@@ -3,9 +3,9 @@ import 'song.dart';
 
 class SongEditorPage extends StatefulWidget {
   final List<Song> songs;
-  SongEditorPage({required this.songs});
+  const SongEditorPage({Key?key,required this.songs}) : super(key: key);
   @override
-  _SongEditorPageState createState() => _SongEditorPageState();
+  State<SongEditorPage> createState() => _SongEditorPageState();
 }
 
 class _SongEditorPageState extends State<SongEditorPage> {
@@ -166,7 +166,7 @@ class _SongEditorPageState extends State<SongEditorPage> {
                                   color: Colors.blue,
                                 ),
                               ),
-                              SizedBox(width: 10),
+                              const SizedBox(width: 10),
                               GestureDetector(
                                 onTap: () => deleteChordsAndLyricsLine(index),
                                 child: const Icon(
@@ -183,7 +183,7 @@ class _SongEditorPageState extends State<SongEditorPage> {
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           Text('Lyrics: ${lyricsList[index]}'),
-                          SizedBox(),
+                          const SizedBox(),
                         ],
                       ),
                       const SizedBox(height: 20),

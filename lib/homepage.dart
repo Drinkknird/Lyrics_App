@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'song.dart';
-import 'songEditor.dart';
-import 'listSong.dart';
+import 'song_editor.dart';
+import 'lost_song.dart';
 
 class HomePage extends StatelessWidget {
-  List<Song> songs = [];
-
+  final List<Song> songs = [];
+  HomePage({Key?key}):super(key: key);
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -80,7 +80,7 @@ class HomePage extends StatelessWidget {
                   });
                 },
                 style: ElevatedButton.styleFrom(
-                  padding: EdgeInsets.all(16),
+                  padding: const EdgeInsets.all(16),
                 ),
                 child: const Row(
                   mainAxisAlignment: MainAxisAlignment.center,
@@ -97,7 +97,7 @@ class HomePage extends StatelessWidget {
                   ],
                 ),
               ),
-              SizedBox(height: 20),
+              const SizedBox(height: 20),
               ElevatedButton(
                 onPressed: () {
                   Navigator.push(

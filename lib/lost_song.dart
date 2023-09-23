@@ -3,11 +3,10 @@ import 'song.dart';
 
 class SongListPage extends StatefulWidget {
   final List<Song> songs;
-  final Key? key;
 
   const SongListPage({
+    Key? key,
     required this.songs,
-    this.key,
   }) : super(key: key);
 
   @override
@@ -15,7 +14,7 @@ class SongListPage extends StatefulWidget {
 }
 
 class SongListPageState extends State<SongListPage> {
-  void editSong(BuildContext context, int index) {
+  void editSong(BuildContext context, int index) async {
     TextEditingController nameController = TextEditingController();
     List<TextEditingController> chordControllers = [];
     List<TextEditingController> lyricControllers = [];
@@ -30,7 +29,7 @@ class SongListPageState extends State<SongListPage> {
           .add(TextEditingController(text: widget.songs[index].lyrics[i]));
     }
 
-    showDialog(
+    await showDialog(
       context: context,
       builder: (context) {
         return StatefulBuilder(
@@ -103,7 +102,7 @@ class SongListPageState extends State<SongListPage> {
               actions: [
                 ElevatedButton(
                   style: ElevatedButton.styleFrom(
-                    backgroundColor: Color.fromARGB(255, 252, 255,
+                    backgroundColor: const Color.fromARGB(255, 252, 255,
                         255), // Set the background color to green
                   ),
                   onPressed: () {
@@ -113,7 +112,7 @@ class SongListPageState extends State<SongListPage> {
                 ),
                 ElevatedButton(
                   style: ElevatedButton.styleFrom(
-                    backgroundColor: Color.fromARGB(255, 187, 255,
+                    backgroundColor: const Color.fromARGB(255, 187, 255,
                         243), // Set the background color to green
                   ),
                   onPressed: () {
@@ -129,7 +128,7 @@ class SongListPageState extends State<SongListPage> {
                     Navigator.pop(context); // Close the dialog
                     setState(() {}); // Rebuild the ListView.builder
                   },
-                  child: Text('Save'),
+                  child: const Text('Save'),
                 ),
               ],
             );
@@ -137,6 +136,8 @@ class SongListPageState extends State<SongListPage> {
         );
       },
     );
+
+    setState(() {});
   }
 
   void deleteSong(BuildContext context, int index) {
@@ -156,7 +157,15 @@ class SongListPageState extends State<SongListPage> {
                   Navigator.pop(context); // Close the song details page
                 }
               },
-              child: const Text('Delete'),
+              style: ElevatedButton.styleFrom(
+                backgroundColor: Colors.red, // กำหนดสีพื้นหลังเป็นสีแดง
+              ),
+              child: const Text(
+                'Delete',
+                style: TextStyle(
+                  color: Colors.white, // กำหนดสีตัวอักษรเป็นสีขาว
+                ),
+              ),
             ),
             ElevatedButton(
               onPressed: () {
@@ -281,9 +290,15 @@ class SongListPageState extends State<SongListPage> {
                               },
                               style: ElevatedButton.styleFrom(
                                 backgroundColor:
-                                    Colors.red, // กำหนดสีพื้นหลังเป็นสีแดง
+                                    Colors.red, // กำหนดสีพื้นหลังเป็นสีขาว
                               ),
-                              child: const Text('Delete'),
+                              child: const Text(
+                                'Delete',
+                                style: TextStyle(
+                                  color: Colors
+                                      .white, // กำหนดสีตัวหนังสือเป็นสีแดง
+                                ),
+                              ),
                             ),
                           ),
                         ],
